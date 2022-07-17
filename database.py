@@ -29,3 +29,23 @@ class Database:
                     FOREIGN KEY(customer_id) REFERENCES customer(rowid),
                     FOREIGN KEY(event_id) REFERENCES event(rowid));"""
             )
+
+    def insert_customer(self, first_name, surname, address):
+        """
+        Inserts given values into customer table
+        """
+        with self.connection:
+            self.connection.execute(
+                "INSERT INTO customer (?, ?, ?);",
+                (first_name, surname, address)
+            )
+
+    def insert_event(self, name, date):
+        """
+        Inserts given values into event table
+        """
+        with self.connection:
+            self.connection.execute(
+                "INSERT INTO event (?, ?);",
+                (name, date)
+            )
