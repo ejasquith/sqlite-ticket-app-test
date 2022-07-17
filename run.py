@@ -1,3 +1,6 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+from database import Database
+
+# Opens database connection, creating file if not found
+db = Database("data.db")
+
+db.create_tables()
