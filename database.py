@@ -49,3 +49,18 @@ class Database:
                 "INSERT INTO event (?, ?);",
                 (name, date)
             )
+
+    def get_ticket_data(self, ticket_id):
+        """
+        Retrieves ticket and linked customer and event data
+        """
+        with self.connection:
+            return self.connection.execute(
+                """SELECT ticket.rowid, customer.first_name, customer.surname, event.event_name
+                   FROM ticket
+                   WHERE ticket.rowid = ?
+                   INNER JOIN customer ON customer.rowid = ticket.customer_id,
+                   INNER JOIN event ON event.rowid = ticket.event_id;
+                """,
+                (ticket_id)
+            )
