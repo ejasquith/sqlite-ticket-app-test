@@ -57,7 +57,7 @@ class Database:
         with self.connection:
             self.connection.execute(
                 "INSERT INTO ticket VALUES (?, ?, ?)",
-                (date_purchased, customer_id, event_id)
+                (customer_id, event_id, date_purchased)
             )
 
     def get_ticket_data(self, ticket_id):
@@ -66,11 +66,11 @@ class Database:
         """
         with self.connection:
             return self.connection.execute(
-                """SELECT ticket.rowid, customer.first_name, customer.surname, event.event_name
-                   FROM ticket
-                   WHERE ticket.rowid = ?
-                   INNER JOIN customer ON customer.rowid = ticket.customer_id,
-                   INNER JOIN event ON event.rowid = ticket.event_id;
-                """,
-                (ticket_id)
+               """SELECT ticket.rowid, customer.first_name, customer.surname, event.name
+                  FROM ticket
+                  INNER JOIN customer ON customer.rowid = ticket.customer_id
+                  INNER JOIN event ON event.rowid = ticket.event_id
+                  WHERE ticket.rowid = ?;
+               """,
+               (str(ticket_id))
             )
