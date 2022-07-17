@@ -50,6 +50,16 @@ class Database:
                 (name, date)
             )
 
+    def insert_ticket(self, date_purchased, customer_id, event_id):
+        """
+        Inserts given values into ticket table
+        """
+        with self.connection:
+            self.connection.execute(
+                "INSERT INTO ticket (?, ?, ?)",
+                (date_purchased, customer_id, event_id)
+            )
+
     def get_ticket_data(self, ticket_id):
         """
         Retrieves ticket and linked customer and event data
