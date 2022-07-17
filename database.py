@@ -36,7 +36,7 @@ class Database:
         """
         with self.connection:
             self.connection.execute(
-                "INSERT INTO customer (?, ?, ?);",
+                "INSERT INTO customer VALUES (?, ?, ?);",
                 (first_name, surname, address)
             )
 
@@ -46,7 +46,7 @@ class Database:
         """
         with self.connection:
             self.connection.execute(
-                "INSERT INTO event (?, ?);",
+                "INSERT INTO event VALUES (?, ?);",
                 (name, date)
             )
 
@@ -56,7 +56,7 @@ class Database:
         """
         with self.connection:
             self.connection.execute(
-                "INSERT INTO ticket (?, ?, ?)",
+                "INSERT INTO ticket VALUES (?, ?, ?)",
                 (date_purchased, customer_id, event_id)
             )
 
